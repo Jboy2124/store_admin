@@ -17,7 +17,7 @@ const Dashboard = () => {
                 <HeaderNav />
                 <div className="py-5">
                   <p></p>
-                  <ul className="flex flex-col space-y-2 text-gray-700 px-5">
+                  <ul className="flex flex-col space-y-2 text-gray-700 px-5 transition-all duration-300">
                     {linkMenu.map((items) => {
                       return (
                         <NavLink
@@ -26,8 +26,8 @@ const Dashboard = () => {
                           className={({ isActive }) => {
                             return `px-2 py-2 ${
                               isActive
-                                ? " border-y-2 border-slate-300"
-                                : " border-y-2 border-transparent"
+                                ? "border-y-2 border-slate-300"
+                                : "border-y-2 border-transparent"
                             }`;
                           }}
                         >
