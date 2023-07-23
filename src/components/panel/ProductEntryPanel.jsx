@@ -10,14 +10,29 @@ const ProductEntryPanel = () => {
   function submitProduct(data) {
     // console.log(data);
     const fd = new FormData();
-    fd.append("prodImage", selectedImage);
-    fd.append("sku", data.sku);
-    fd.append("brand", data.brand);
-    fd.append("model", data.model);
-    fd.append("desc", data.desc);
-    fd.append("color", data.color);
-    fd.append("rom", data.rom);
-    fd.append("ram", data.ram);
+    const entries = [
+      { key: "prodImage", value: selectedImage },
+      { key: "sku", value: data.sku },
+      { key: "brand", value: data.brand },
+      { key: "model", value: data.model },
+      { key: "desc", value: data.desc },
+      { key: "color", value: data.color },
+      { key: "rom", value: data.rom },
+      { key: "ram", value: data.ram },
+    ];
+
+    for (const data of entries) {
+      fd.append(data.key, data.value);
+    }
+
+    // fd.append("prodImage", selectedImage);
+    // fd.append("sku", data.sku);
+    // fd.append("brand", data.brand);
+    // fd.append("model", data.model);
+    // fd.append("desc", data.desc);
+    // fd.append("color", data.color);
+    // fd.append("rom", data.rom);
+    // fd.append("ram", data.ram);
     addProduct(fd);
     reset();
   }
