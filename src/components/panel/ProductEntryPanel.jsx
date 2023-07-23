@@ -1,21 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAddProductMutation } from "../../endpoints/handlers/products";
 
 const ProductEntryPanel = () => {
   const { register, handleSubmit, reset } = useForm();
   const [addProduct] = useAddProductMutation();
+  const [selectedImage, setSelectedImage] = useState("");
 
   function submitProduct(data) {
-    addProduct(data);
+    // console.log(data);
+    const fd = new FormData();
+    fd.append("prodImage", selectedImage);
+    fd.append("sku", data.sku);
+    fd.append("brand", data.brand);
+    fd.append("model", data.model);
+    fd.append("desc", data.desc);
+    fd.append("color", data.color);
+    fd.append("rom", data.rom);
+    fd.append("ram", data.ram);
+    addProduct(fd);
     reset();
   }
 
   return (
     <div className="h-[40vh] bg-slate-300 font-poppins text-[14px]">
-      <form onSubmit={handleSubmit(submitProduct)}>
+      <form
+        onSubmit={handleSubmit(submitProduct)}
+        encType="multipart/form-data"
+      >
         <div className="flex justify-evenly items-start py-5">
           <div className="w-full space-y-3">
+            <div className="px-10 flex flex-col">
+              <label htmlFor="prodImage" className="text-[12px]">
+                Please select image
+              </label>
+              <input
+                id="prodImage"
+                name="prodImage"
+                type="file"
+                multiple
+                accept="image/*"
+                // placeholder="SKU"
+                className="w-full outline-none px-2 py-[6px] bg-slate-200"
+                onChange={(e) => setSelectedImage(e.target.files[0])}
+                // {...register("sku")}
+              />
+            </div>
             <div className="px-10 flex flex-col">
               <label htmlFor="sku" className="text-[12px]">
                 SKU/Serial
@@ -55,6 +85,8 @@ const ProductEntryPanel = () => {
                 {...register("model")}
               />
             </div>
+          </div>
+          <div className="w-full space-y-3">
             <div className="px-10 flex flex-col">
               <label htmlFor="desc" className="text-[12px]">
                 Description
@@ -68,8 +100,6 @@ const ProductEntryPanel = () => {
                 {...register("desc")}
               />
             </div>
-          </div>
-          <div className="w-full space-y-3">
             <div className="px-10 flex flex-col">
               <label htmlFor="color" className="text-[12px]">
                 Color
@@ -111,34 +141,7 @@ const ProductEntryPanel = () => {
                 />
               </div>
             </div>
-            {/* <div className="flex justify-evenly items-center">
-              <div className="px-10 flex flex-col">
-                <label htmlFor="qty" className="text-[12px]">
-                  Quantity
-                </label>
-                <input
-                  id="qty"
-                  name="qty"
-                  type="text"
-                  placeholder="Quantity"
-                  className="w-full outline-none px-2 py-[6px] bg-slate-200"
-                  {...register("qty")}
-                />
-              </div>
-              <div className="px-10 flex flex-col">
-                <label htmlFor="price" className="text-[12px]">
-                  Price
-                </label>
-                <input
-                  id="price"
-                  name="price"
-                  type="text"
-                  placeholder="Price"
-                  className="w-full outline-none px-2 py-[6px] bg-slate-200"
-                  {...register("price")}
-                />
-              </div>
-            </div> */}
+
             <div className="text-center pt-5 px-10">
               <button
                 type="submit"

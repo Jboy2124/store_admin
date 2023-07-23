@@ -4,6 +4,11 @@ const productEndpoints = apiInstance.injectEndpoints({
   endpoints: (builder) => ({
     products: builder.query({
       query: () => "/products",
+      transformResponse: (res) => {
+        return res.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+      },
       providesTags: ["Products"],
     }),
     addProduct: builder.mutation({
@@ -18,4 +23,8 @@ const productEndpoints = apiInstance.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useAddProductMutation } = productEndpoints;
+export const {
+  useProductsQuery,
+  useAddProductMutation,
+  useLazyProductImageQuery,
+} = productEndpoints;
