@@ -1,11 +1,17 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Products from "./components/products/Products";
 import Accounts from "./components/accounts/Accounts";
 import Settings from "./components/settings/Settings";
 import Main from "./components/main/Main";
 import NotFound from "./pages/utils/NotFound";
+import Login from "./pages/utils/Login";
+import RouteProtection from "./components/private-route/RouteProtection";
 
 const App = () => {
   const routes = createBrowserRouter([
@@ -13,12 +19,45 @@ const App = () => {
       path: "/",
       element: <Dashboard />,
       children: [
-        { path: "/", element: <Main /> },
-        { path: "/products", element: <Products /> },
-        { path: "/accounts", element: <Accounts /> },
-        { path: "/settings", element: <Settings /> },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/dashboard",
+          element: (
+            <RouteProtection>
+              <Main />
+            </RouteProtection>
+          ),
+        },
+        {
+          path: "/products",
+          element: (
+            <RouteProtection>
+              <Products />
+            </RouteProtection>
+          ),
+        },
+        {
+          path: "/accounts",
+          element: (
+            <RouteProtection>
+              <Accounts />
+            </RouteProtection>
+          ),
+        },
+        {
+          path: "/settings",
+          element: (
+            <RouteProtection>
+              <Settings />
+            </RouteProtection>
+          ),
+        },
       ],
     },
+
     {
       path: "*",
       element: <NotFound />,

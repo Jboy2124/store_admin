@@ -2,7 +2,7 @@ export const linkMenu = [
   {
     id: 1,
     name: "Dashboard",
-    link: "/",
+    link: "/dashboard",
   },
   {
     id: 2,
