@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+import { useLoginMutation } from "./endpoints/handlers/auth";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Products from "./components/products/Products";
 import Accounts from "./components/accounts/Accounts";
@@ -14,50 +15,44 @@ import Login from "./pages/utils/Login";
 import RouteProtection from "./components/private-route/RouteProtection";
 
 const App = () => {
+  const [login, { data }] = useLoginMutation();
+
+  useEffect(() => {
+    console.log(import.meta.env.STORED_EMAIL);
+
+    login({
+      email: "jboy@gmail.com",
+      password: "password",
+    });
+  }, []);
+
   const routes = createBrowserRouter([
     {
       path: "/",
       element: <Dashboard />,
       children: [
+        // {
+        //   path: "/login",
+        //   element: <Login />,
+        // },
         {
-          path: "/login",
-          element: <Login />,
-        },
-        {
-          path: "/dashboard",
-          element: (
-            <RouteProtection>
-              <Main />
-            </RouteProtection>
-          ),
+          path: "/",
+          element: <Main />,
         },
         {
           path: "/products",
-          element: (
-            <RouteProtection>
-              <Products />
-            </RouteProtection>
-          ),
+          element: <Products />,
         },
         {
           path: "/accounts",
-          element: (
-            <RouteProtection>
-              <Accounts />
-            </RouteProtection>
-          ),
+          element: <Accounts />,
         },
         {
           path: "/settings",
-          element: (
-            <RouteProtection>
-              <Settings />
-            </RouteProtection>
-          ),
+          element: <Settings />,
         },
       ],
     },
-
     {
       path: "*",
       element: <NotFound />,

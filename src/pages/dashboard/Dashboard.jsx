@@ -1,6 +1,4 @@
-import React from "react";
-// import SidePanel from "../../components/panel/SidePanel";
-// import Products from "../../components/products/Products";
+import React, { useEffect } from "react";
 import { linkMenu } from "../../utils/const";
 import { NavLink, Outlet } from "react-router-dom";
 import SocialMedia from "../../components/footer/SocialMedia";
