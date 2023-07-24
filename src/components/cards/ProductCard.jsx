@@ -5,11 +5,11 @@ const ProductCard = (props) => {
   return (
     <div className="w-[380px] h-[120px] bg-slate-200 ring-1 ring-slate-300 ring-inset shadow-sm hover:shadow-2xl duration-300">
       <div className="flex justify-start items-start p-2">
-        <div className="w-[100px] h-[80px]">
+        <div className="w-[111px]">
           <img
             src={`http://localhost:8000/${image}`}
             alt="prod image"
-            className="rounded-l hover:scale-x-[4.0] hover:scale-y-[4.0] duration-300 overflow-hidden"
+            className="rounded-l"
           />
         </div>
         <div className="w-full h-[103px] bg-blue-200 rounded-r px-2 py-2 text-[10px] font-poppins">

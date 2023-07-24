@@ -19,20 +19,13 @@ const ProductEntryPanel = () => {
       { key: "color", value: data.color },
       { key: "rom", value: data.rom },
       { key: "ram", value: data.ram },
+      { key: "qty", value: data.qty },
+      { key: "price", value: data.price },
     ];
 
     for (const data of entries) {
       fd.append(data.key, data.value);
     }
-
-    // fd.append("prodImage", selectedImage);
-    // fd.append("sku", data.sku);
-    // fd.append("brand", data.brand);
-    // fd.append("model", data.model);
-    // fd.append("desc", data.desc);
-    // fd.append("color", data.color);
-    // fd.append("rom", data.rom);
-    // fd.append("ram", data.ram);
     addProduct(fd);
     reset();
   }
@@ -153,6 +146,34 @@ const ProductEntryPanel = () => {
                   placeholder="ROM"
                   className="w-full outline-none px-2 py-[6px] bg-slate-200"
                   {...register("ram")}
+                />
+              </div>
+            </div>
+            <div className="flex justify-evenly items-center">
+              <div className="px-10 flex flex-col">
+                <label htmlFor="qty" className="text-[12px]">
+                  Qty
+                </label>
+                <input
+                  id="qty"
+                  name="qty"
+                  type="number"
+                  placeholder="Quantity"
+                  className="w-full outline-none px-2 py-[6px] bg-slate-200"
+                  {...register("qty")}
+                />
+              </div>
+              <div className="px-10 flex flex-col">
+                <label htmlFor="price" className="text-[12px]">
+                  Price
+                </label>
+                <input
+                  id="price"
+                  name="price"
+                  type="number"
+                  placeholder="Price"
+                  className="w-full outline-none px-2 py-[6px] bg-slate-200"
+                  {...register("price")}
                 />
               </div>
             </div>

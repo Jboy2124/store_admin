@@ -3,7 +3,7 @@ import { apiInstance } from "../../api/apiInstance";
 const productEndpoints = apiInstance.injectEndpoints({
   endpoints: (builder) => ({
     products: builder.query({
-      query: () => "/products",
+      query: (pageNo) => `/products?page=${pageNo}`,
       transformResponse: (res) => {
         return res.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)

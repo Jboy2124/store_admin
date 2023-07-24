@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductEntryPanel from "../panel/ProductEntryPanel";
 import DisplayTable from "../utils/DisplayTable";
 import { useProductsQuery } from "../../endpoints/handlers/products";
@@ -6,7 +6,8 @@ import TradTable from "../utils/TradTable";
 import ProductCard from "../cards/ProductCard";
 
 const Products = () => {
-  const { data = [] } = useProductsQuery();
+  const [page, setPage] = useState(1);
+  const { data = [] } = useProductsQuery(page);
 
   console.log(data);
 
