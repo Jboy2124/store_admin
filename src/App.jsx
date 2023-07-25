@@ -15,14 +15,12 @@ import Login from "./pages/utils/Login";
 import RouteProtection from "./components/private-route/RouteProtection";
 
 const App = () => {
-  const [login, { data }] = useLoginMutation();
+  const [login] = useLoginMutation();
 
   useEffect(() => {
-    console.log(import.meta.env.STORED_EMAIL);
-
     login({
-      email: "jboy@gmail.com",
-      password: "password",
+      email: import.meta.env.VITE_STORED_EMAIL,
+      password: import.meta.env.VITE_STORED_PASSWORD,
     });
   }, []);
 
